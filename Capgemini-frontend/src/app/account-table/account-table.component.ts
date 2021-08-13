@@ -12,7 +12,7 @@ export class AccountTableComponent implements OnInit {
 	constructor(private apiService: ApiService) { }
 
 	ngOnInit() {
-		this.apiService.get('BE58431265588767').subscribe((data: any)=>{   
+		this.apiService.getAccountInformations('BE58431265588767').subscribe((data: any)=>{   
 			this.account = data;  
       console.log(this.account);
       
