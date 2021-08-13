@@ -23,7 +23,7 @@ export class ApiService {
     ).pipe(catchError(this.handleError));  
 	} 
 
-  //handing errors
+  //handling errors
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
     if (error.error instanceof ErrorEvent) {
