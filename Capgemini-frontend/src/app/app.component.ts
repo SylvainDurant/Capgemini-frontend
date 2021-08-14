@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Capgemini-frontend';
-
-  findAccount() {
-    console.log("hello world");
-  }
 }
