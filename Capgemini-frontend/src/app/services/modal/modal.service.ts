@@ -7,8 +7,11 @@ export class ModalService {
 
   constructor() { }
 
-  public closeModal () {
-    const button = document.getElementById("closeButton");
+  public closeModal (modalID: string) {
+    console.log("in closeModal");
+    const modal = document.getElementById(modalID);
+    const button = modal?.querySelector("a");
+    console.log(button);
 
     button?.click();
   }
