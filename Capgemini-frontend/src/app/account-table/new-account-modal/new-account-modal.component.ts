@@ -27,20 +27,22 @@ export class NewAccountModalComponent implements OnInit {
   onSubmit() {
     this.error = '';
 
+    console.log(this.initialCredit);
+    
     if (!this.customerID) {
       this.error = "Please, enter a valid customer id.";
-    } else if (!this.initialCredit || this.initialCredit < 0) {
+    } else if (!this.initialCredit || (this.initialCredit < 0)) {
       this.error = "Please, enter a positive value.";
     } else {
       this.loading = true;
       this.dataObject.customerID = this.customerID;
       this.dataObject.initialCredit = parseInt(this.initialCredit);
 
-      this.apiService.postNewAccount(this.dataObject).subscribe((data: any)=>{
+      this.apiService.postNewAccount(this.dataObject).subscribe( async (data: any)=>{
         if (data.error) {
           this.loading = false;
           this.error = data.error;
-        } else {
+        } else {          
           this.apiService.getAccountInformations(data.accountNumber).subscribe((data: any)=>{
             if (data.error) {
               this.loading = false;

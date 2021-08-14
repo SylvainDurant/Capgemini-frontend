@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account-table.component.css']
 })
 export class AccountTableComponent implements OnInit {
-
+	
 	account: any = {};
 
 	constructor() { }
@@ -17,5 +17,4 @@ export class AccountTableComponent implements OnInit {
 	receiveAccount(account: object) {
 		this.account = account
 	}
-
 }
