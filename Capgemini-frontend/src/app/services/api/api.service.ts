@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import {  throwError } from 'rxjs';
+import {  throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class ApiService {
       "api/currentAccount/accountInformations/" +
       accountID
     ).pipe(catchError(this.handleError));  
-	} 
+	}
 
   // create new account
   public postNewAccount(dataObject: object){ 
@@ -35,14 +35,15 @@ export class ApiService {
   } 
 
   // create new transaction
-  public putNewTransaction(dataObject: object){ 
+  public putNewTransaction(dataObject: any){ 
     console.log('in api service: ', dataObject);
-      
-    // return this.httpClient.get(
-    //   this.CORS_PROXY +
-    //   this.SERVER_URL +
-    //   "api/currentAccount/accountInformations/"
-    // ).pipe(catchError(this.handleError));  
+    
+    return this.httpClient.put(
+      this.CORS_PROXY +
+      this.SERVER_URL +
+      "api/transaction/newTransaction",
+      dataObject
+    ).pipe(catchError(this.handleError));  
   } 
 
   //handling errors
