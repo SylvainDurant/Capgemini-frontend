@@ -3,9 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AccountTableComponent } from './account-table/account-table.component';
 import { TransactionModalComponent } from './account-table/transaction-modal/transaction-modal.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -16,7 +20,7 @@ import { TransactionModalComponent } from './account-table/transaction-modal/tra
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
