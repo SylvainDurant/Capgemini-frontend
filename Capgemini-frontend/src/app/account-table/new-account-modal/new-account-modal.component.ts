@@ -36,15 +36,15 @@ export class NewAccountModalComponent implements OnInit {
 
       this.apiService.postNewAccount(this.dataObject).subscribe((data: any)=>{
         if (data.error) {
+          this.loading = false;
           this.error = data.error;
         } else {
-          console.log("result post: ",data);
           this.apiService.getAccountInformations(data.accountNumber).subscribe((data: any)=>{
-            console.log("result get: ",data);
             if (data.error) {
+              this.loading = false;
               this.error = data.error;
             } else {
-              this.loading = true;
+              this.loading = false;
               this.modalService.closeModal("newAccountModal");
               this.passAccountEvent.emit(data);
             }
