@@ -1,3 +1,10 @@
+<div class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#newAccountModal">
+  <button type="button" class="btn btn-outline-primary my-4">create new account</button>
+</div>
+<div class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#findModal">
+  <button type="button" class="btn btn-outline-primary mb-4">find account</button>
+</div>
+
 <div id="informations" class="mb-5">
     <h4><u>Account Informations:</u></h4>
     <table class="table">
@@ -11,10 +18,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>Bob</td>
-                <td>Stricker</td>
-                <td>BE45802859385493</td>
-                <td>1000€</td>
+                <td>{{account.userInformations.firstName}}</td>
+                <td>{{account.userInformations.lastName}}</td>
+                <td>{{account.accountNumber}}</td>
+                <td>{{account.credit}}€</td>
             </tr>
         </tbody>
     </table>
@@ -33,14 +40,80 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>BE45802859385493</td>
-                <td>BE34588638838234</td>
-                <td>13/08/2021</td>
-                <td>1000€</td>
+            <tr *ngFor="let transaction of account.transactions">
+                <td *ngIf="(transaction.sender == account.accountNumber);">
+                  {{transaction.sender}} (you)
+                </td>
+                <td *ngIf="(transaction.sender != account.accountNumber);">
+                  {{transaction.sender}}
+                </td>
+                <td *ngIf="(transaction.receiver == account.accountNumber);">
+                  {{transaction.receiver}} (you)
+                </td>
+                <td *ngIf="(transaction.receiver != account.accountNumber);">
+                  {{transaction.receiver}}
+                </td>
+                <td>{{transaction.create_at | date: 'dd/MM/yyyy'}}</td>
+                <td *ngIf="(transaction.sender == account.accountNumber );">
+                  -{{transaction.value}}€
+                </td>
+                <td *ngIf="(transaction.sender != account.accountNumber );">
+                  +{{transaction.value}}€
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
 
+
 <app-transaction-modal></app-transaction-modal>
+
+<!-- new account modal -->
+<div class="modal fade" id="newAccountModal" tabindex="-1" aria-labelledby="newAccountModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newAccountModalLabel">New account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-around">
+          <div>
+            <label for="customerID">customerID:</label><br>
+            <input type="text" id="customerID" name="customerID">
+          </div>
+          <div>
+            <label for="initialCredit">initialCredit:</label><br>
+            <input type="number" id="initialCredit" name="initialCredit">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- find modal -->
+<div class="modal fade" id="findModal" tabindex="-1" aria-labelledby="findModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <h5 class="modal-title" id="findModalLabel">Find account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+          <div>
+            <label for="AccountNumber">Account number:</label><br>
+            <input type="text" id="AccountNumber" name="AccountNumber" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
