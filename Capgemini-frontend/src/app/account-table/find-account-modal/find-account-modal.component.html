@@ -12,7 +12,12 @@
                         <input #accountNumber type="text" id="AccountNumber" name="AccountNumber" required>
                     </div>
                 </div>
-                <p class="errorMessage" *ngIf="(error);">{{error}}</p>
+                <div class="d-flex justify-content-center mb-2">
+                    <div class="spinner-border text-primary center" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="errorMessage" *ngIf="(error);">{{error}}</p>
+                </div>
                 <div class="modal-footer">
                     <button  type="submit" class="btn btn-primary">Find</button>
                     <a visible="false" data-bs-dismiss="modal"></a>
