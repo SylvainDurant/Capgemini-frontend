@@ -11,6 +11,7 @@ export class NewAccountModalComponent implements OnInit {
 
   error: string = "";
   dataObject: any = {};
+  loading: boolean = false;
   @Output() passAccountEvent = new EventEmitter<object>();
 
   constructor(
@@ -29,6 +30,7 @@ export class NewAccountModalComponent implements OnInit {
     } else if (!initialCredit || initialCredit < 0) {
       this.error = "Please, enter a positive value.";
     } else {
+      this.loading = true;
       this.dataObject.customerID = customerID;
       this.dataObject.initialCredit = parseInt(initialCredit);
 
@@ -42,6 +44,7 @@ export class NewAccountModalComponent implements OnInit {
             if (data.error) {
               this.error = data.error;
             } else {
+              this.loading = true;
               this.modalService.closeModal("newAccountModal");
               this.passAccountEvent.emit(data);
             }

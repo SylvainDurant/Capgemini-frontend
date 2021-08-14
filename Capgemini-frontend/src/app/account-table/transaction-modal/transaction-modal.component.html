@@ -20,7 +20,12 @@
                         <input #transactionValue type="number" id="transactionValue" name="transactionValue" required>
                     </div>
                 </div>
-                <p class="errorMessage" *ngIf="(error);">{{error}}</p>
+                <div class="d-flex justify-content-center mb-2">
+                    <div class="spinner-border text-primary center" role="status" *ngIf="(loading);">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="errorMessage" *ngIf="(error);">{{error}}</p>
+                </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Create</button>
                     <a visible="false" data-bs-dismiss="modal"></a>

@@ -14,6 +14,7 @@ export class TransactionModalComponent implements OnInit {
 
   error: string = "";
   dataObject: any = {};
+  loading: boolean = false;
   @Output() passAccountEvent = new EventEmitter<object>();
 
   constructor(
@@ -32,6 +33,7 @@ export class TransactionModalComponent implements OnInit {
     } else if (!transactionValue || transactionValue <= 0) {
       this.error = "Please, enter a value greater than 0.";
     } else {
+      this.loading = true;
       this.dataObject.sender = sender;
       this.dataObject.receiver = receiver;
       this.dataObject.transactionValue = parseInt(transactionValue);
@@ -45,6 +47,7 @@ export class TransactionModalComponent implements OnInit {
             if (data.error) {
               this.error = data.error;
             } else {
+              this.loading = true;
               this.modalService.closeModal("transactionModal");
               this.passAccountEvent.emit(data);
             }
