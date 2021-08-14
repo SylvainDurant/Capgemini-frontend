@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mb-2">
-                    <div class="spinner-border text-primary center" role="status">
+                    <div class="spinner-border text-primary center" role="status" *ngIf="(loading);">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                     <p class="errorMessage" *ngIf="(error);">{{error}}</p>
