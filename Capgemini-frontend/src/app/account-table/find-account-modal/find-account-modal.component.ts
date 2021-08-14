@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api/api.service';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-find-account-modal',
@@ -11,7 +12,10 @@ export class FindAccountModalComponent implements OnInit {
   error: string = "";
   @Output() passAccountEvent = new EventEmitter<object>();
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private modalService: ModalService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +30,7 @@ export class FindAccountModalComponent implements OnInit {
         if (data.error) {
           this.error = data.error;
         } else {
+          this.modalService.closeModal()
           this.passAccountEvent.emit(data);
         }
       }) 
