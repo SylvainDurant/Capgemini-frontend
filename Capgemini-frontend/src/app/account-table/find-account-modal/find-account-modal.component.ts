@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-find-account-modal',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FindAccountModalComponent implements OnInit {
 
-  constructor() { }
+  error: string = "";
+  @Output() passAccountEvent = new EventEmitter<object>();
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(accountNumber: string) {
+    this.error = '';
+
+    if (!accountNumber) {
+      this.error = "Please, enter a valid account number.";
+    } else {
+      this.apiService.getAccountInformations(accountNumber).subscribe((data: any)=>{
+        if (data.error) {
+          this.error = data.error;
+        } else {
+          this.passAccountEvent.emit(data);
+        }
+      }) 
+    } 
+  }
 }
