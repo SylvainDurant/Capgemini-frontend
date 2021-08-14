@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-account-table',
@@ -9,14 +8,14 @@ import { ApiService } from '../api.service';
 export class AccountTableComponent implements OnInit {
 
 	account: any = {};
-	constructor(private apiService: ApiService) { }
+
+	constructor() { }
 
 	ngOnInit() {
-		this.apiService.getAccountInformations('BE58431265588767').subscribe((data: any)=>{   
-			this.account = data;  
-      console.log(this.account);
-      
-		})  
+	}
+
+	receiveAccount(account: object) {
+		this.account = account
 	}
 
 }

@@ -5,66 +5,68 @@
   <button type="button" class="btn btn-outline-primary mb-4">find account</button>
 </div>
 
-<div id="informations" class="mb-5">
-    <h4><u>Account Informations:</u></h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">first name</th>
-                <th scope="col">last name</th>
-                <th scope="col">account number</th>
-                <th scope="col">balance</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{account.userInformations.firstName}}</td>
-                <td>{{account.userInformations.lastName}}</td>
-                <td>{{account.accountNumber}}</td>
-                <td>{{account.credit}}€</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<div id="account" *ngIf="(account.accountNumber);">
+  <div id="informations" class="mb-5">
+      <h4><u>Account Informations:</u></h4>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th scope="col">first name</th>
+                  <th scope="col">last name</th>
+                  <th scope="col">account number</th>
+                  <th scope="col">balance</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>{{account.userInformations.firstName}}</td>
+                  <td>{{account.userInformations.lastName}}</td>
+                  <td>{{account.accountNumber}}</td>
+                  <td>{{account.credit}}€</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 
-<div id="transactions">
-    <h4><u>Transactions:</u></h4>
-    <button type="button" class="btn btn-outline-primary my-2" data-bs-toggle="modal" data-bs-target="#transactionModal">make a new transaction</button>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">from:</th>
-                <th scope="col">to:</th>
-                <th scope="col">date:</th>
-                <th scope="col">value:</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let transaction of account.transactions">
-                <td *ngIf="(transaction.sender == account.accountNumber);">
-                  {{transaction.sender}} (you)
-                </td>
-                <td *ngIf="(transaction.sender != account.accountNumber);">
-                  {{transaction.sender}}
-                </td>
-                <td *ngIf="(transaction.receiver == account.accountNumber);">
-                  {{transaction.receiver}} (you)
-                </td>
-                <td *ngIf="(transaction.receiver != account.accountNumber);">
-                  {{transaction.receiver}}
-                </td>
-                <td>{{transaction.create_at | date: 'dd/MM/yyyy'}}</td>
-                <td *ngIf="(transaction.sender == account.accountNumber );">
-                  -{{transaction.value}}€
-                </td>
-                <td *ngIf="(transaction.sender != account.accountNumber );">
-                  +{{transaction.value}}€
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <div id="transactions">
+      <h4><u>Transactions:</u></h4>
+      <button type="button" class="btn btn-outline-primary my-2" data-bs-toggle="modal" data-bs-target="#transactionModal">make a new transaction</button>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th scope="col">from:</th>
+                  <th scope="col">to:</th>
+                  <th scope="col">date:</th>
+                  <th scope="col">value:</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let transaction of account.transactions">
+                  <td *ngIf="(transaction.sender == account.accountNumber);">
+                    {{transaction.sender}} (you)
+                  </td>
+                  <td *ngIf="(transaction.sender != account.accountNumber);">
+                    {{transaction.sender}}
+                  </td>
+                  <td *ngIf="(transaction.receiver == account.accountNumber);">
+                    {{transaction.receiver}} (you)
+                  </td>
+                  <td *ngIf="(transaction.receiver != account.accountNumber);">
+                    {{transaction.receiver}}
+                  </td>
+                  <td>{{transaction.create_at | date: 'dd/MM/yyyy'}}</td>
+                  <td *ngIf="(transaction.sender == account.accountNumber );">
+                    -{{transaction.value}}€
+                  </td>
+                  <td *ngIf="(transaction.sender != account.accountNumber );">
+                    +{{transaction.value}}€
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 </div>
 
 <app-new-account-modal></app-new-account-modal>
-<app-find-account-modal></app-find-account-modal>
+<app-find-account-modal (passAccountEvent)="receiveAccount($event)"></app-find-account-modal>
 <app-transaction-modal [accountNumber]="account.accountNumber"></app-transaction-modal>
