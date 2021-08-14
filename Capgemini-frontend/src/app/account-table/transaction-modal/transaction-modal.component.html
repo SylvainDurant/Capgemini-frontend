@@ -1,23 +1,23 @@
 <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form (ngSubmit)="onSubmit(sender.value, receiver.value, transactionValue.value)" (keydown.enter)="$event.preventDefault()">
+            <form (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
                 <div class="modal-header">
                     <h5 class="modal-title" id="transactionModalLabel">New transaction</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex flex-wrap justify-content-around">
                     <div>
-                        <label for="customerID">sender:</label><br>
-                        <input #sender type="text" id="customerID" name="customerID" value={{accountNumber}} readonly>
+                        <label for="senderID">sender:</label><br>
+                        <input [(ngModel)]="sender" type="text" id="senderID" name="senderID" readonly>
                     </div>
                     <div>
-                        <label for="customerID">receiver:</label><br>
-                        <input #receiver type="text" id="customerID" name="customerID" required>
+                        <label for="receiverID">receiver:</label><br>
+                        <input [(ngModel)]="receiver" type="text" id="receiverID" name="receiverID" required>
                     </div>
                     <div>
                         <label for="transactionValue">transaction value:</label><br>
-                        <input #transactionValue type="number" id="transactionValue" name="transactionValue" required>
+                        <input [(ngModel)]="transactionValue" type="number" id="transactionValue" name="transactionValue" required>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mb-2">

@@ -9,8 +9,9 @@ import { ModalService } from '../../services/modal/modal.service';
 })
 export class FindAccountModalComponent implements OnInit {
 
-  error: string = "";
+  error: string = '';
   loading: boolean = false;
+  accountNumber:string = '';
   @Output() passAccountEvent = new EventEmitter<object>();
 
   constructor(
@@ -21,21 +22,20 @@ export class FindAccountModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(accountNumber: string) {
+  onSubmit() {
     this.error = '';
 
-    if (!accountNumber || accountNumber.length != 16) { //16 being the length of an account number
+    if (!this.accountNumber || this.accountNumber.length != 16) { //16 being the length of an account number
       this.error = "Please, enter a valid account number.";
     } else {
       this.loading = true;
 
-      this.apiService.getAccountInformations(accountNumber).subscribe((data: any)=>{
+      this.apiService.getAccountInformations(this.accountNumber).subscribe((data: any)=>{
         if (data.error) {
           this.loading = false;
           this.error = data.error;
         } else {
-          const accountNumberInput = document.getElementById("AccountNumber");
-          
+          this.accountNumber = '';
           this.loading = false;
           this.modalService.closeModal("findModal");
           this.passAccountEvent.emit(data);

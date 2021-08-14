@@ -10,11 +10,13 @@ import { ModalService } from '../../services/modal/modal.service';
 export class TransactionModalComponent implements OnInit {
 
   @Input()
-  accountNumber: string = '';
+  sender: string = '';
 
   error: string = "";
   dataObject: any = {};
   loading: boolean = false;
+  receiver: string = '';
+  transactionValue: any;
   @Output() passAccountEvent = new EventEmitter<object>();
 
   constructor(
@@ -25,29 +27,32 @@ export class TransactionModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(sender: string, receiver: string,  transactionValue: any) {
+  onSubmit() {
     this.error = '';
 
-    if (!receiver) {
+    if (!this.receiver || this.receiver.length != 16) { //16 being the length of an account number
       this.error = "Please, enter a valid account number.";
-    } else if (!transactionValue || transactionValue <= 0) {
+    } else if (!this.transactionValue || this.transactionValue <= 0) {
       this.error = "Please, enter a value greater than 0.";
     } else {
       this.loading = true;
-      this.dataObject.sender = sender;
-      this.dataObject.receiver = receiver;
-      this.dataObject.transactionValue = parseInt(transactionValue);
+      this.dataObject.sender = this.sender;
+      this.dataObject.receiver = this.receiver;
+      this.dataObject.transactionValue = parseInt(this.transactionValue);
       
       this.apiService.putNewTransaction(this.dataObject).subscribe((data: any)=>{
         if (data.error) {
           this.loading = false;
           this.error = data.error;
         } else {
-          this.apiService.getAccountInformations(data.sender).subscribe((data: any)=>{
+          this.apiService.getAccountInformations(this.sender).subscribe((data: any)=>{
             if (data.error) {
               this.loading = false;
               this.error = data.error;
             } else {
+              this.sender = '';
+              this.receiver = '';
+              this.transactionValue = '';
               this.loading = true;
               this.modalService.closeModal("transactionModal");
               this.passAccountEvent.emit(data);

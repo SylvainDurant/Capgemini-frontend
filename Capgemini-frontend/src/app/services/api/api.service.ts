@@ -35,6 +35,8 @@ export class ApiService {
 
   // create new transaction
   public putNewTransaction(dataObject: any){ 
+    console.log("in transaction: ", dataObject);
+    
     return this.httpClient.put(
       this.CORS_PROXY +
       this.SERVER_URL +

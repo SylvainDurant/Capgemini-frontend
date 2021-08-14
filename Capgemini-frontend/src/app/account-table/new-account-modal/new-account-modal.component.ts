@@ -12,6 +12,8 @@ export class NewAccountModalComponent implements OnInit {
   error: string = "";
   dataObject: any = {};
   loading: boolean = false;
+  customerID: string = "";
+  initialCredit: any;
   @Output() passAccountEvent = new EventEmitter<object>();
 
   constructor(
@@ -22,17 +24,17 @@ export class NewAccountModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(customerID: string,  initialCredit: any) {
+  onSubmit() {
     this.error = '';
 
-    if (!customerID) {
+    if (!this.customerID) {
       this.error = "Please, enter a valid customer id.";
-    } else if (!initialCredit || initialCredit < 0) {
+    } else if (!this.initialCredit || this.initialCredit < 0) {
       this.error = "Please, enter a positive value.";
     } else {
       this.loading = true;
-      this.dataObject.customerID = customerID;
-      this.dataObject.initialCredit = parseInt(initialCredit);
+      this.dataObject.customerID = this.customerID;
+      this.dataObject.initialCredit = parseInt(this.initialCredit);
 
       this.apiService.postNewAccount(this.dataObject).subscribe((data: any)=>{
         if (data.error) {
@@ -44,6 +46,8 @@ export class NewAccountModalComponent implements OnInit {
               this.loading = false;
               this.error = data.error;
             } else {
+              this.customerID = '';
+              this.initialCredit = '';
               this.loading = false;
               this.modalService.closeModal("newAccountModal");
               this.passAccountEvent.emit(data);
