@@ -44,6 +44,7 @@ export class NewAccountModalComponent implements OnInit {
             if (data.error) {
               this.error = data.error;
             } else {
+              this.loading = true;
               this.modalService.closeModal("newAccountModal");
               this.passAccountEvent.emit(data);
             }

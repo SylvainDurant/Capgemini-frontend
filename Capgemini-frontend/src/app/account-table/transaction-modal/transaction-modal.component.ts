@@ -47,6 +47,7 @@ export class TransactionModalComponent implements OnInit {
             if (data.error) {
               this.error = data.error;
             } else {
+              this.loading = true;
               this.modalService.closeModal("transactionModal");
               this.passAccountEvent.emit(data);
             }
