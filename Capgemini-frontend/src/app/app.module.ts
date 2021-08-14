@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountTableComponent } from './account-table/account-table.component';
+import { TransactionModalComponent } from './account-table/transaction-modal/transaction-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccountTableComponent
+    AccountTableComponent,
+    TransactionModalComponent
   ],
   imports: [
     BrowserModule,
