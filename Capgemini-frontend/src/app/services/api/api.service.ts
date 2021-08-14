@@ -25,19 +25,16 @@ export class ApiService {
 
   // create new account
   public postNewAccount(dataObject: object){ 
-    console.log('in api service: ', dataObject);
-     
-    // return this.httpClient.get(
-    //   this.CORS_PROXY +
-    //   this.SERVER_URL +
-    //   "api/currentAccount/accountInformations/"
-    // ).pipe(catchError(this.handleError));  
+    return this.httpClient.post(
+      this.CORS_PROXY +
+      this.SERVER_URL +
+      "api/currentAccount/newCurrentAccount",
+      dataObject
+    ).pipe(catchError(this.handleError));  
   } 
 
   // create new transaction
   public putNewTransaction(dataObject: any){ 
-    console.log('in api service: ', dataObject);
-    
     return this.httpClient.put(
       this.CORS_PROXY +
       this.SERVER_URL +

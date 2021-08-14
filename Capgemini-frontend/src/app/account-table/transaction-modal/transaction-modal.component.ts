@@ -36,13 +36,19 @@ export class TransactionModalComponent implements OnInit {
       this.dataObject.receiver = receiver;
       this.dataObject.transactionValue = parseInt(transactionValue);
       
-      this.apiService.postNewAccount(this.dataObject).subscribe((data: any)=>{
+      this.apiService.putNewTransaction(this.dataObject).subscribe((data: any)=>{
         console.log(data);
         if (data.error) {
           this.error = data.error;
         } else {
-          this.modalService.closeModal("transactionModal");
-          this.passAccountEvent.emit(data);
+          this.apiService.getAccountInformations(data.sender).subscribe((data: any)=>{
+            if (data.error) {
+              this.error = data.error;
+            } else {
+              this.modalService.closeModal("transactionModal");
+              this.passAccountEvent.emit(data);
+            }
+          }) 
         }
       }) 
     } 

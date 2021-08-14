@@ -36,8 +36,16 @@ export class NewAccountModalComponent implements OnInit {
         if (data.error) {
           this.error = data.error;
         } else {
-          this.modalService.closeModal("newAccountModal");
-          this.passAccountEvent.emit(data);
+          console.log("result post: ",data);
+          this.apiService.getAccountInformations(data.accountNumber).subscribe((data: any)=>{
+            console.log("result get: ",data);
+            if (data.error) {
+              this.error = data.error;
+            } else {
+              this.modalService.closeModal("newAccountModal");
+              this.passAccountEvent.emit(data);
+            }
+          }) 
         }
       }) 
     } 
