@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+import { ApiService } from '../../services/api/api.service';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-transaction-modal',
@@ -10,9 +12,39 @@ export class TransactionModalComponent implements OnInit {
   @Input()
   accountNumber: string = '';
 
-  constructor() { }
+  error: string = "";
+  dataObject: any = {};
+  @Output() passAccountEvent = new EventEmitter<object>();
+
+  constructor(
+    private apiService: ApiService,
+    private modalService: ModalService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(sender: string, receiver: string,  transactionValue: any) {
+    this.error = '';
+
+    if (!receiver) {
+      this.error = "Please, enter a valid account number.";
+    } else if (!transactionValue || transactionValue <= 0) {
+      this.error = "Please, enter a value greater than 0.";
+    } else {
+      this.dataObject.sender = sender;
+      this.dataObject.receiver = receiver;
+      this.dataObject.transactionValue = parseInt(transactionValue);
+
+      this.apiService.postNewAccount(this.dataObject)
+      // .subscribe((data: any)=>{
+      //   if (data.error) {
+      //     this.error = data.error;
+      //   } else {
+      //     this.modalService.closeModal()
+      //     this.passAccountEvent.emit(data);
+      //   }
+      // }) 
+    } 
+  }
 }
