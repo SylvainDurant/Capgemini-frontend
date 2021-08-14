@@ -39,12 +39,13 @@ export class TransactionModalComponent implements OnInit {
       this.dataObject.transactionValue = parseInt(transactionValue);
       
       this.apiService.putNewTransaction(this.dataObject).subscribe((data: any)=>{
-        console.log(data);
         if (data.error) {
+          this.loading = false;
           this.error = data.error;
         } else {
           this.apiService.getAccountInformations(data.sender).subscribe((data: any)=>{
             if (data.error) {
+              this.loading = false;
               this.error = data.error;
             } else {
               this.loading = true;

@@ -31,6 +31,7 @@ export class FindAccountModalComponent implements OnInit {
 
       this.apiService.getAccountInformations(accountNumber).subscribe((data: any)=>{
         if (data.error) {
+          this.loading = false;
           this.error = data.error;
         } else {
           const accountNumberInput = document.getElementById("AccountNumber");
