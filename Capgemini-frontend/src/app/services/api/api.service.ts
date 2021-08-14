@@ -23,6 +23,28 @@ export class ApiService {
     ).pipe(catchError(this.handleError));  
 	} 
 
+  // create new account
+  public postNewAccount(dataObject: object){ 
+    console.log('in api service: ', dataObject);
+     
+    // return this.httpClient.get(
+    //   this.CORS_PROXY +
+    //   this.SERVER_URL +
+    //   "api/currentAccount/accountInformations/"
+    // ).pipe(catchError(this.handleError));  
+  } 
+
+  // create new transaction
+  public putNewTransaction(dataObject: object){ 
+    console.log('in api service: ', dataObject);
+      
+    // return this.httpClient.get(
+    //   this.CORS_PROXY +
+    //   this.SERVER_URL +
+    //   "api/currentAccount/accountInformations/"
+    // ).pipe(catchError(this.handleError));  
+  } 
+
   //handling errors
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

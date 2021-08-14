@@ -1,7 +1,7 @@
 <div class="modal fade" id="newAccountModal" tabindex="-1" aria-labelledby="newAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="">
+            <form (ngSubmit)="onSubmit(customerID.value, initialCredit.value)" (keydown.enter)="$event.preventDefault()">
                 <div class="modal-header">
                     <h5 class="modal-title" id="newAccountModalLabel">New account</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -9,15 +9,17 @@
                 <div class="modal-body d-flex justify-content-around">
                     <div>
                         <label for="customerID">customerID:</label><br>
-                        <input type="text" id="customerID" name="customerID" required>
+                        <input #customerID type="text" id="customerID" name="customerID" required>
                     </div>
                     <div>
                         <label for="initialCredit">initialCredit:</label><br>
-                        <input type="number" id="initialCredit" name="initialCredit" required>
+                        <input #initialCredit type="number" id="initialCredit" name="initialCredit" required>
                     </div>
                 </div>
+                <p class="errorMessage" *ngIf="(error);">{{error}}</p>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Create</button>
+                    <a id="closeButton" visible="false" data-bs-dismiss="modal"></a>
                 </div>
             </form>
         </div>
