@@ -11,6 +11,7 @@ import { AccountTableComponent } from './account-table/account-table.component';
 import { TransactionModalComponent } from './account-table/transaction-modal/transaction-modal.component';
 import { FindAccountModalComponent } from './account-table/find-account-modal/find-account-modal.component';
 import { NewAccountModalComponent } from './account-table/new-account-modal/new-account-modal.component';
+import { ReminderComponent } from './account-table/reminder/reminder.component';
 
 
 
@@ -21,7 +22,8 @@ import { NewAccountModalComponent } from './account-table/new-account-modal/new-
     AccountTableComponent,
     TransactionModalComponent,
     FindAccountModalComponent,
-    NewAccountModalComponent
+    NewAccountModalComponent,
+    ReminderComponent
   ],
   imports: [
     BrowserModule,
