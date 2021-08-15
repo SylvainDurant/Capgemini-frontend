@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.0.
 
-This is a simple single-page Angular application consuming the [Api](https://github.com/SylvainDurant/Capgemini) created for Capgemini. The application is accesible on [this link](https://capgemini-frontend.herokuapp.com/).
+This is a simple single-page Angular application consuming the [Api](https://github.com/SylvainDurant/Capgemini) created for Capgemini. The application is accessible on [this link](https://capgemini-frontend.herokuapp.com/).
 
 # features
 
