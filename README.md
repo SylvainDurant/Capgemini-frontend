@@ -6,4 +6,4 @@ This is a simple single-page Angular application consuming the [Api](https://git
 
 # features
 
-All the data are showned dynamically preventing page refreshing. In addition of consuming the api, this application has an `account history` keeping in Local Storage the `accountNumber` of the accounts created or visited. 
+All the data are showned dynamically preventing page refreshing. In addition of consuming the api, this application has an `account history` keeping in Local Storage the `accountNumber` of the accounts created and visited. 
