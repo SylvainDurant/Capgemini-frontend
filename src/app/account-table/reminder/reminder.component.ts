@@ -14,14 +14,16 @@ export class ReminderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.accountArray.length);
-    console.log(this.accountArray);
-    
+    if(localStorage.getItem('accountArray')) {
+      this.accountArray = localStorage.getItem('accountArray')?.split(",");
+    }
   }
 
   ngOnChanges() {
     if (this.accountNumber && !this.accountArray.includes(this.accountNumber)) {
       this.accountArray.push(this.accountNumber);
+
+      localStorage.setItem('accountArray', this.accountArray);
     }
   }
 
