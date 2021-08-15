@@ -1,0 +1,7 @@
+.reminder {
+    position: fixed;
+    top: 40px;
+    right: 50px;
+    max-width: 160px;
+    border: 1px solid black;
+}

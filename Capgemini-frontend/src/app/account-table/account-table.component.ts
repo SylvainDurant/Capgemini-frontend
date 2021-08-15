@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-account-table',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account-table.component.css']
 })
 export class AccountTableComponent implements OnInit {
-	
+
 	account: any = {};
 
 	constructor() { }
