@@ -11,10 +11,10 @@ function requireHTTPS(req, res, next) {
     next();
 }
 
-app.use(express.static('./dist/capgemini-frontend'));
+app.use(express.static('./dist/Capgemini-frontend'));
 
 app.get('/*', function(req, res) {
-    res.sendFile('index.html', {root: './dist/capgemini-frontend'}
+    res.sendFile('index.html', {root: './dist/Capgemini-frontend'}
   );
 });
 
