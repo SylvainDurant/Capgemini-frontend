@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-account-table',
@@ -16,5 +17,8 @@ export class AccountTableComponent implements OnInit {
 
 	receiveAccount(account: object) {
 		this.account = account
+		if (this.account.userInformations.firstName === "Wade") {
+			console.log(environment.wade);
+		}
 	}
 }
