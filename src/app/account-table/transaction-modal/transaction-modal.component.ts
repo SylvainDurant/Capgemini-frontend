@@ -34,6 +34,8 @@ export class TransactionModalComponent implements OnInit {
       this.error = "Please, enter a valid account number.";
     } else if (!this.transactionValue || this.transactionValue <= 0) {
       this.error = "Please, enter a value greater than 0.";
+    } else if (this.sender === this.receiver) {
+      this.error = "Sender and receiver cannot be the same account.";
     } else {
       this.loading = true;
       this.dataObject.sender = this.sender;
