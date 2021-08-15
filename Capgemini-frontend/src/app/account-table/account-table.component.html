@@ -5,6 +5,8 @@
   <button type="button" class="btn btn-outline-primary mb-4">find account</button>
 </div>
 
+<app-reminder class="reminder rounded shadow" [accountNumber]="account.accountNumber"></app-reminder>
+
 <div id="account" *ngIf="(account.accountNumber);">
   <div id="informations" class="mb-5">
       <h4><u>Account Informations:</u></h4>

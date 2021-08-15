@@ -36,25 +36,25 @@ export class NewAccountModalComponent implements OnInit {
       this.dataObject.customerID = this.customerID;
       this.dataObject.initialCredit = parseInt(this.initialCredit);
 
-      // this.apiService.postNewAccount(this.dataObject).subscribe( async (data: any)=>{
-      //   if (data.error) {
-      //     this.loading = false;
-      //     this.error = data.error;
-      //   } else {          
-      //     this.apiService.getAccountInformations(data.accountNumber).subscribe((data: any)=>{
-      //       if (data.error) {
-      //         this.loading = false;
-      //         this.error = data.error;
-      //       } else {
-      //         this.customerID = '';
-      //         this.initialCredit = '';
-      //         this.loading = false;
-      //         this.modalService.closeModal("newAccountModal");
-      //         this.passAccountEvent.emit(data);
-      //       }
-      //     }) 
-      //   }
-      // }) 
+      this.apiService.postNewAccount(this.dataObject).subscribe( async (data: any)=>{
+        if (data.error) {
+          this.loading = false;
+          this.error = data.error;
+        } else {          
+          this.apiService.getAccountInformations(data.accountNumber).subscribe((data: any)=>{
+            if (data.error) {
+              this.loading = false;
+              this.error = data.error;
+            } else {
+              this.customerID = '';
+              this.initialCredit = '';
+              this.loading = false;
+              this.modalService.closeModal("newAccountModal");
+              this.passAccountEvent.emit(data);
+            }
+          }) 
+        }
+      }) 
     } 
   }
 }
